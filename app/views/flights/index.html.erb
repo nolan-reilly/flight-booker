@@ -1,0 +1,29 @@
+<h1>Flights#index</h1>
+<p>Find me in app/views/flights/index.html.erb</p>
+
+
+<%= form_with url: "flights_path", method: :get do |form| %>
+
+    <div>
+        <%= form.label :arrival_airport %>
+        <%= form.select :arrival_airport, Airport.order(:code).map { |airport| [airport.code, airport.id] } %>
+    </div>
+
+    <div>
+        <%= form.label :departure_airport %>
+        <%= form.select :departure_airport, Airport.order(:code).map { |airport| [airport.code, airport.id] } %>
+    </div>
+
+    <div>
+        <%= form.label :num_passengers, "Number of Passengers" %>
+        <%= form.number_field :num_passengers, min: 1, max: 4, required: true, value: 1 %>
+    </div>
+
+    <div>
+        <%= form.label :start_date %>
+        <%= form.datetime_field :start_date %>
+    </div>
+
+    <%= form.submit "Search" %>
+
+<% end %>

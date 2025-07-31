@@ -1,0 +1,13 @@
+<h1>Booking Confirmation</h1>
+
+<h2><%= @booking.id %></h2>
+
+<h3><%= @booking.flight.id %></h3>
+
+<p>Passengers</p>
+
+<ul>
+    <% @booking.passengers.each do |passenger| %>
+        <li><%= passenger.name %></li>
+    <% end %>
+</ul>

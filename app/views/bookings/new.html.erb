@@ -1,0 +1,44 @@
+<h1>Bookings#new</h1>
+<p>Find me in app/views/bookings/new.html.erb</p>
+
+<h1>Flight: <%= @flight.id %></h1>
+
+<%= form_with model: @booking do |form| %>
+    <%= form.hidden_field :flight_id, value: @flight.id %> 
+
+    <div>
+        <%= form.label :arrival_airport %>
+        <p><%= @flight.arrival_airport.code %></p>
+    </div>
+
+    <div>
+        <%= form.label :departure_airport %>
+        <p><%= @flight.departure_airport.code %></p>
+    </div>
+
+    <div>
+        <%= form.label :start_date %>
+        <p><%= @flight.start_date %></p>
+    </div>
+
+    <ul>
+        <% @booking.passengers.each do |passenger, i| %>
+            <%= form.fields_for :passengers, passenger do |passengers_form| %>
+                <li>
+                    <div>
+                        <%= passengers_form.label :name %>
+                        <%= passengers_form.text_field :name %>
+                    </div>
+
+                    <div>
+                        <%= passengers_form.label :email %>
+                        <%= passengers_form.text_field :email %>
+                    </div>
+                </li>
+            <% end %>
+        <% end %>
+    </ul>
+
+    <%= form.submit %>
+
+<% end %>
